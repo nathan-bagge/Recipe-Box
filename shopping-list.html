@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping List — Recipe Box</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="page">
+
+  <div id="header-mount"></div>
+
+  <a class="recipe-back" href="index.html">&larr; Back to Recipe Box</a>
+
+  <div class="shopping-list-actions">
+    <button type="button" id="clear-checked-btn">Clear checked</button>
+    <button type="button" id="clear-all-btn">Clear entire list</button>
+  </div>
+
+  <div id="shopping-list-content"></div>
+  <div class="no-results" id="shopping-list-empty" style="display:none;">
+    Nothing here yet — open a recipe and tap "Add to Shopping List".
+  </div>
+
+  <div id="footer-mount"></div>
+</div>
+
+<script src="js/theme.js"></script>
+<script src="js/shopping-list.js"></script>
+<script>
+  RecipeBoxTheme.renderHeader(false);
+  RecipeBoxTheme.renderFooter();
+</script>
+</body>
+</html>

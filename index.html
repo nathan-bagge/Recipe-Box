@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipe Box</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#a13d2f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Recipes" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="page">
+
+  <div id="header-mount"></div>
+
+  <div class="search-wrap">
+    <input type="text" id="recipe-search" placeholder="Search recipes, ingredients, tags..." autocomplete="off" />
+    <span class="search-count" id="search-count"></span>
+  </div>
+
+  <div class="tag-filters" id="tag-filters"></div>
+
+  <div class="recipe-grid" id="recipe-grid"></div>
+  <div class="no-results" id="no-results">No recipes match.</div>
+
+  <div id="footer-mount"></div>
+</div>
+
+<script src="js/recipes-data.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/site-search.js"></script>
+<script src="js/pull-to-refresh.js"></script>
+<script>
+  RecipeBoxTheme.renderHeader(true);
+  RecipeBoxTheme.renderFooter();
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capture a Recipe — Recipe Box</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="page">
+
+  <div id="header-mount"></div>
+
+  <a class="recipe-back" href="index.html">&larr; Back to Recipe Box</a>
+
+  <p class="capture-link-hint">
+    Found a recipe while browsing? Tap the <strong>Add to Recipe Box</strong> bookmarklet below on
+    that page, and it'll bring you here with the title and link ready. Hit the button to continue
+    to the submission form — anyone can submit a recipe this way, and they'll get added to the site
+    in a batch once they're reviewed.
+  </p>
+
+  <div class="capture-field" id="capture-title-field" style="display:none;">
+    <label>Page Title</label>
+    <div class="capture-value" id="capture-title-value"></div>
+  </div>
+
+  <div class="capture-field" id="capture-url-field" style="display:none;">
+    <label>Source Link</label>
+    <div class="capture-value"><a id="capture-url-value" target="_blank" rel="noopener"></a></div>
+  </div>
+
+  <div class="capture-field">
+    <a class="capture-copy-btn" id="open-form-btn" href="#" target="_blank" rel="noopener" style="display:inline-block; text-decoration:none;">Continue to Recipe Form &rarr;</a>
+    <p id="source-not-wired-note" style="display:none; font-size:0.76rem; color:var(--text-muted); margin-top:10px; max-width:56ch;">
+      Note: the source link isn't being auto-filled into the form yet — that piece is still being wired up. You can paste it in manually once you're there.
+    </p>
+  </div>
+
+  <div class="capture-field">
+    <label>Prefer to send it directly instead?</label>
+    <textarea class="capture-textarea" id="capture-textarea"></textarea>
+    <br />
+    <button type="button" class="capture-copy-btn" id="capture-copy-btn">Copy to Clipboard</button>
+    <span class="capture-copy-status" id="capture-copy-status"></span>
+  </div>
+
+  <div class="bookmarklet-box">
+    <p style="font-size:0.85rem; margin-bottom:10px;"><strong>Set up the bookmarklet (one-time):</strong></p>
+    <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:12px; line-height:1.6;">
+      Drag the button below to your browser's bookmarks bar. On mobile, you may need to bookmark any
+      page first, then edit that bookmark and paste this into the URL field instead.
+      <br /><br />
+      <strong>Before using it</strong>, replace <code>YOUR-GITHUB-USERNAME</code> in the link below with
+      your actual GitHub username, otherwise it won't point to your live site.
+    </p>
+    <a class="bookmarklet-link" id="bookmarklet-link" href="#">+ Add to Recipe Box</a>
+  </div>
+
+  <div id="footer-mount"></div>
+</div>
+
+<script src="js/theme.js"></script>
+<script>
+  RecipeBoxTheme.renderHeader(false);
+  RecipeBoxTheme.renderFooter();
+
+  (function () {
+    var FORM_BASE_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSffGFy929fPgGGADAUOe3dNN3OtJVYstDr25hKBcpWa4E1OcQ/viewform';
+    var ENTRY_TITLE = '237834467';   // confirmed
+    var ENTRY_SOURCE = null;         // still need this one — see note in the UI
+
+    var params = new URLSearchParams(window.location.search);
+    var url = params.get('url') || '';
+    var title = params.get('title') || '';
+
+    if (title) {
+      document.getElementById('capture-title-field').style.display = '';
+      document.getElementById('capture-title-value').textContent = title;
+    }
+    if (url) {
+      document.getElementById('capture-url-field').style.display = '';
+      var a = document.getElementById('capture-url-value');
+      a.textContent = url;
+      a.href = url;
+    }
+
+    var formLink = FORM_BASE_URL;
+    var formParams = [];
+    if (title) formParams.push('entry.' + ENTRY_TITLE + '=' + encodeURIComponent(title));
+    if (url && ENTRY_SOURCE) formParams.push('entry.' + ENTRY_SOURCE + '=' + encodeURIComponent(url));
+    if (formParams.length) formLink += '?' + formParams.join('&');
+    document.getElementById('open-form-btn').setAttribute('href', formLink);
+
+    if (url && !ENTRY_SOURCE) {
+      document.getElementById('source-not-wired-note').style.display = 'block';
+    }
+
+    var message = "I found a recipe I'd like added to my Recipe Box:\n\n" +
+      (title ? 'Title: ' + title + '\n' : '') +
+      (url ? 'Source: ' + url + '\n' : '') +
+      '\n(Paste the ingredients and method here before sending)';
+    document.getElementById('capture-textarea').value = message;
+
+    document.getElementById('capture-copy-btn').addEventListener('click', function () {
+      var textarea = document.getElementById('capture-textarea');
+      var status = document.getElementById('capture-copy-status');
+      navigator.clipboard.writeText(textarea.value).then(function () {
+        status.textContent = 'Copied!';
+        setTimeout(function () { status.textContent = ''; }, 2000);
+      }).catch(function () {
+        textarea.select();
+        status.textContent = 'Select-all done — copy manually.';
+      });
+    });
+
+    // Bookmarklet source — opens capture.html on the current site with the
+    // page's URL and title attached, from wherever the person is browsing.
+    var bookmarkletSrc =
+      "javascript:(function(){var u=encodeURIComponent(location.href);" +
+      "var t=encodeURIComponent(document.title);" +
+      "window.open('https://YOUR-GITHUB-USERNAME.github.io/recipe-box/capture.html?url='+u+'&title='+t,'_blank');" +
+      "})();";
+    document.getElementById('bookmarklet-link').setAttribute('href', bookmarkletSrc);
+  })();
+</script>
+</body>
+</html>
