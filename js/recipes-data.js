@@ -146,5 +146,40 @@ window.RECIPES = [
     ],
     notes: 'Very rich \u2014 cut into small squares. The caramel needs continuous whisking or it can catch and burn, so don\u2019t walk away from the pan during that step.',
     source: 'https://www.bbcgoodfood.com/recipes/millionaires-shortbread'
+  },
+  {
+    id: 'rich-christmas-pudding',
+    title: 'Christmas Pudding',
+    tags: ['dessert', 'christmas', 'baking', 'traditional'],
+    baseServings: 24,
+    cookTime: '6\u20137 hr boil',
+    description: 'Christmas pudding',
+    ingredients: [
+      { id: 'sultanas', name: 'sultanas', amount: 10, unit: 'oz' },
+      { id: 'currants', name: 'currants', amount: 10, unit: 'oz' },
+      { id: 'raisins', name: 'raisins', amount: 0.5, unit: 'lb' },
+      { id: 'almonds', name: 'sweet almonds, skinned and chopped', amount: 2, unit: 'oz' },
+      { id: 'ginger', name: 'ground ginger', amount: 1, unit: 'tsp' },
+      { id: 'flour', name: 'plain flour', amount: 0.5, unit: 'lb' },
+      { id: 'salt', name: 'salt', amount: 1, unit: 'pinch' },
+      { id: 'sugar', name: 'soft brown sugar', amount: 1, unit: 'lb' },
+      { id: 'candiedPeel', name: 'mixed candied peel, finely chopped', amount: 0.5, unit: 'lb' },
+      { id: 'mixedSpice', name: 'mixed spice', amount: 1, unit: 'tsp' },
+      { id: 'nutmeg', name: 'grated nutmeg', amount: 1, unit: 'tsp' },
+      { id: 'breadcrumbs', name: 'breadcrumbs', amount: 0.5, unit: 'lb' },
+      { id: 'suet', name: 'suet, finely chopped or shredded', amount: 10, unit: 'oz' },
+      { id: 'eggs', name: 'eggs', amount: 6, unit: null },
+      { id: 'stout', name: 'stout', amount: 0.5, unit: 'gill' },
+      { id: 'orangeJuice', name: 'orange, juiced', amount: 1, unit: null },
+      { id: 'brandy', name: 'brandy', amount: 1, unit: 'wineglass' },
+      { id: 'milk', name: 'milk, approx. \u2014 enough for a soft dropping consistency', amount: 0.5, unit: 'pint' }
+    ],
+    steps: [
+      'Grease three 1-pint pudding basins.',
+      'Prepare the dried fruit \u2014 the {sultanas} sultanas, {currants} currants, and {raisins} raisins \u2014 then skin and chop the {almonds} almonds.',
+      'Sift the {flour} flour, {salt} salt, {mixedSpice} mixed spice, {ginger} ginger, and {nutmeg} nutmeg into a large mixing bowl. Add the {sugar} sugar, {breadcrumbs} breadcrumbs, {suet} suet, the prepared fruit and nuts, and the {candiedPeel} candied peel, and mix well.',
+      'Beat the {eggs} eggs well and add to them the {stout} stout, {brandy} brandy, and {orangeJuice} orange juice, then stir this into the dry ingredients, adding enough of the {milk} milk to make a soft dropping consistency.',
+      'Cover and boil steadily for 6\u20137 hours. {timer:21600} Take the puddings out of the water and cover them with a clean, dry cloth. When cold, store in a cool place until required.'
+    ],
   }
 ];
