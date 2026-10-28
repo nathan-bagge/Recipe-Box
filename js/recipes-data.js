@@ -169,7 +169,7 @@ window.RECIPES = [
       { id: 'breadcrumbs', name: 'breadcrumbs', amount: 0.5, unit: 'lb' },
       { id: 'suet', name: 'suet, finely chopped or shredded', amount: 10, unit: 'oz' },
       { id: 'eggs', name: 'eggs', amount: 6, unit: null },
-      { id: 'stout', name: 'stout', amount: 0.5, unit: 'gill' },
+      { id: 'stout', name: 'stout', amount: 0.5, unit: 'pint' },
       { id: 'orangeJuice', name: 'orange, juiced', amount: 1, unit: null },
       { id: 'brandy', name: 'brandy', amount: 1, unit: 'wineglass' },
       { id: 'milk', name: 'milk, approx. \u2014 enough for a soft dropping consistency', amount: 0.5, unit: 'pint' }
